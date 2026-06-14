@@ -1,109 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lawhi — Quran Memorization App</title>
-  <style>
-    :root {
-      --bg: #1c1a17;
-      --text: #e8e4dc;
-      --muted: #a39e94;
-      --accent: #c8a96a;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-    }
-    .container { max-width: 600px; }
-    h1 {
-      font-size: 3.5rem;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      margin-bottom: 1rem;
-    }
-    .tagline {
-      font-size: 1rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-    .divider {
-      width: 60px;
-      height: 1px;
-      background: var(--muted);
-      margin: 2rem auto;
-    }
-    .description {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      color: var(--text);
-      margin-bottom: 2.5rem;
-    }
-    .stores {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-    }
-    .store-btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      border: 1px solid var(--accent);
-      border-radius: 8px;
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: background 0.2s, color 0.2s;
-    }
-    .store-btn:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
-    footer {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 0;
-      right: 0;
-      text-align: center;
-    }
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      margin: 0 0.75rem;
-    }
-    footer a:hover { color: var(--text); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lawhi — Write the Quran to Remember It</title>
+<meta name="description" content="Lawhi is a Quran memorization app that helps you remember by writing. Reconstruct each page word by word, track your progress across devices, and work toward your khatmah. Free and ad-free on iOS and Android.">
+<meta property="og:title" content="Lawhi — Write the Quran to Remember It">
+<meta property="og:description" content="Memorize the Quran the way it was learned for centuries — by writing. Free and ad-free on iOS and Android.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lawhapp.com">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f0e6d2'/%3E%3Cpath d='M9 26V11a7 7 0 0 1 14 0v15a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2z' fill='none' stroke='%235c3317' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --cream:#f5efe3; --cream-2:#ece3d1; --card:#fffdf8;
+    --ink:#2b2118; --muted:#6f6557; --line:#e3d8c3;
+    --brown:#5c3317; --brown-soft:#7a4a28;
+    --gold:#c8a96a; --gold-deep:#b8860b; --tan:#cba06a;
+    --shadow:0 18px 50px -22px rgba(60,40,20,.45);
+    --radius:22px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--cream); color:var(--ink); line-height:1.65;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .arabic{font-family:"Scheherazade New","Amiri","Traditional Arabic",serif}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(245,239,227,.82);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:1.25rem;letter-spacing:.04em}
+  .brand .logo{width:38px;height:38px;border-radius:10px;background:var(--cream-2);
+    display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line)}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{color:var(--muted);font-size:.95rem;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--brown)}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;border-radius:999px;
+    padding:.7rem 1.4rem;font-size:.95rem;transition:transform .15s,box-shadow .2s,background .2s;cursor:pointer;border:none}
+  .btn-primary{background:var(--brown);color:var(--cream)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 24px -10px rgba(92,51,23,.6)}
+  .btn-ghost{background:transparent;color:var(--brown);box-shadow:inset 0 0 0 1.5px var(--brown)}
+  .btn-ghost:hover{background:var(--brown);color:var(--cream)}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer}
+
+  /* HERO */
+  .hero{position:relative;padding:84px 0 70px;overflow:hidden}
+  .hero:before{content:"";position:absolute;inset:0;background:
+    radial-gradient(1100px 520px at 78% -8%,rgba(200,169,106,.20),transparent 60%),
+    radial-gradient(720px 480px at -5% 10%,rgba(92,51,23,.08),transparent 55%);}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--cream-2);
+    color:var(--brown-soft);font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:.4rem .85rem;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);margin-bottom:22px}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--gold-deep)}
+  h1.hero-title{font-size:clamp(2.5rem,5.2vw,4rem);line-height:1.08;font-weight:700;letter-spacing:-.02em}
+  h1.hero-title .accent{color:var(--brown);position:relative}
+  .hero-sub{margin-top:22px;font-size:1.2rem;color:var(--muted);max-width:30em}
+  .hero-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-note{margin-top:18px;color:var(--muted);font-size:.9rem;display:flex;align-items:center;gap:10px}
+  .hero-note b{color:var(--brown)}
+
+  /* PHONE MOCKUP */
+  .hero-visual{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:0}
+  .phone{position:relative;width:280px;height:574px;border-radius:42px;background:#0e0c0a;
+    padding:12px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.2)}
+  .phone .screen{width:100%;height:100%;border-radius:32px;overflow:hidden;position:relative;
+    display:flex;flex-direction:column}
+  .phone .notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);
+    width:96px;height:22px;background:#0e0c0a;border-radius:999px;z-index:6}
+  .phone.back{transform:rotate(-7deg) translateX(34px) scale(.9);position:absolute;left:-3%;bottom:8%;z-index:1;opacity:.96}
+  .phone.front{z-index:3;transform:rotate(3deg)}
+
+  /* screen: reading view (dark) */
+  .sc-dark{background:#16130f;color:#efe7d6}
+  .sc-top{display:flex;justify-content:space-between;align-items:center;padding:34px 18px 8px;font-size:.78rem;color:#cdbfa6}
+  .sc-banner{margin:6px 14px;border-radius:10px;background:linear-gradient(90deg,#efe3cb,#e3d2ad);
+    text-align:center;padding:9px;color:#5c3317;font-weight:600;font-size:.95rem}
+  .sc-lines{flex:1;padding:14px 16px;position:relative}
+  .sc-line{height:1px;background:#3a342b;margin:30px 0;position:relative}
+  .ayah{position:absolute;left:-2px;top:-11px;width:22px;height:22px;border-radius:50%;
+    border:1.4px solid var(--gold);color:var(--gold);font-size:.62rem;display:grid;place-items:center}
+  .sc-tray{background:#211c16;border-radius:18px 18px 0 0;padding:12px 12px 14px;margin-top:auto}
+  .sc-bar{height:6px;border-radius:99px;background:#3a342b;position:relative;margin:4px 0 12px}
+  .sc-bar i{position:absolute;inset:0 70% 0 0;background:var(--gold);border-radius:99px}
+  .sc-tray h4{font-size:.85rem;text-align:center;color:#efe7d6;margin-bottom:10px;font-weight:600}
+  .chips{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .chip{background:#322b22;border-radius:8px;padding:9px 4px;text-align:center;font-size:.78rem;color:#e7dcc4}
+
+  /* screen: account view (light) */
+  .sc-light{background:#f4efe6;color:#2b2118}
+  .sc-light .sc-top{color:#8c8170}
+  .sc-h{padding:8px 18px 4px;font-size:1.5rem;font-weight:700}
+  .card-ui{background:#fff;margin:10px 16px;border-radius:16px;padding:16px;box-shadow:0 8px 22px -16px rgba(0,0,0,.3)}
+  .row{display:flex;align-items:center;gap:12px}
+  .av{width:42px;height:42px;border-radius:50%;background:#ece3d1;display:grid;place-items:center;color:#5c3317}
+  .signin{margin-top:14px;background:var(--tan);color:#fff;text-align:center;padding:12px;border-radius:12px;font-weight:600}
+  .label{font-size:.7rem;letter-spacing:.08em;color:#8c8170;font-weight:600;margin:14px 16px 0}
+  .opt{display:flex;align-items:center;justify-content:space-between;background:#fff;margin:8px 16px;padding:14px;border-radius:14px}
+  .opt .l{display:flex;align-items:center;gap:12px;font-weight:500}
+  .icn{width:34px;height:34px;border-radius:9px;background:#f0e7d6;display:grid;place-items:center;color:#b8860b;font-size:1rem}
+  .toggle{width:42px;height:24px;border-radius:99px;background:#5c3317;position:relative}
+  .toggle i{position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:var(--gold)}
+  .tabbar{display:flex;justify-content:space-around;padding:12px 4px 14px;border-top:1px solid #e3d8c3;background:#fff;font-size:.62rem;color:#9a8f7c}
+  .tabbar .t{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .tabbar .t.on{color:#5c3317;font-weight:700}
+  .tabbar .t b{width:20px;height:20px;border-radius:6px;background:#f0e7d6;display:block}
+  .tabbar .t.on b{background:#5c3317}
+
+  /* SECTION SHELL */
+  section{padding:90px 0}
+  .sec-head{text-align:center;max-width:620px;margin:0 auto 56px}
+  .kicker{color:var(--gold-deep);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem}
+  h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:700;letter-spacing:-.02em;margin:12px 0 14px;line-height:1.12}
+  .sec-head p{color:var(--muted);font-size:1.12rem}
+
+  /* HOW IT WORKS */
+  .how{background:var(--cream-2)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .step{background:var(--card);border-radius:var(--radius);padding:32px 28px;box-shadow:var(--shadow);
+    border:1px solid var(--line);position:relative;overflow:hidden}
+  .step .num{font-size:.85rem;font-weight:700;color:var(--gold-deep);letter-spacing:.1em}
+  .step h3{font-size:1.25rem;margin:14px 0 10px;font-weight:650}
+  .step p{color:var(--muted);font-size:1rem}
+  .step .glyph{position:absolute;right:-10px;bottom:-18px;font-size:6rem;opacity:.06;color:var(--brown);font-weight:800}
+
+  /* FEATURES */
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .feature{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 26px;transition:transform .2s,box-shadow .2s}
+  .feature:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .feature .fi{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#f0e7d6,#e6d6b6);
+    display:grid;place-items:center;margin-bottom:18px;color:var(--brown)}
+  .feature h3{font-size:1.18rem;margin-bottom:8px;font-weight:650}
+  .feature p{color:var(--muted);font-size:.98rem}
+
+  /* SHOWCASE STRIP */
+  .showcase{background:linear-gradient(180deg,var(--cream),var(--cream-2))}
+  .show-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+  .stat-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px;flex:1;min-width:130px}
+  .stat .big{font-size:1.7rem;font-weight:700;color:var(--brown)}
+  .stat .lbl{color:var(--muted);font-size:.85rem}
+  .show-phones{display:flex;justify-content:center;align-items:center;min-height:560px;position:relative}
+
+  /* analytics mini cards inside phone */
+  .an-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px}
+  .an-card{background:#fff;border-radius:14px;padding:14px;box-shadow:0 8px 20px -16px rgba(0,0,0,.3)}
+  .an-card .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;margin-bottom:10px;font-size:.9rem}
+  .an-card .v{font-size:1.4rem;font-weight:700}
+  .an-card .k{color:#8c8170;font-size:.72rem}
+  .streak{display:flex;justify-content:space-around;background:#fff;margin:8px 16px;border-radius:14px;padding:14px;
+    box-shadow:0 8px 20px -16px rgba(0,0,0,.3);text-align:center}
+  .streak div b{display:block;font-size:1.1rem;color:#2b2118}
+  .streak div span{font-size:.65rem;color:#8c8170}
+
+  /* DOWNLOAD */
+  .download{background:var(--brown);color:var(--cream);border-radius:0}
+  .dl-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+  .download h2{color:var(--cream)}
+  .download .sec-p{color:#e4d8c2;font-size:1.12rem;max-width:30em}
+  .store-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+  .store{display:inline-flex;align-items:center;gap:12px;background:#0e0c0a;color:#fff;
+    padding:12px 20px;border-radius:14px;transition:transform .15s}
+  .store:hover{transform:translateY(-3px)}
+  .store small{display:block;font-size:.65rem;opacity:.8;letter-spacing:.04em}
+  .store b{display:block;font-size:1.05rem;line-height:1.1}
+  .qr-row{display:flex;gap:26px;justify-content:center;flex-wrap:wrap}
+  .qr{background:var(--cream);border-radius:18px;padding:18px;text-align:center;color:var(--ink);width:170px}
+  .qr .q{width:130px;height:130px;border-radius:10px;margin:0 auto 10px;
+    background:repeating-conic-gradient(#2b2118 0 25%,#fff 0 50%) 0 0/22px 22px;position:relative;overflow:hidden}
+  .qr .q:after{content:"placeholder";position:absolute;inset:auto 0 6px;font-size:.55rem;color:#5c3317;
+    background:rgba(245,239,227,.85);padding:2px}
+  .qr .q .fp{position:absolute;width:34px;height:34px;border:6px solid #2b2118;background:#fff}
+  .qr .q .fp.tl{top:8px;left:8px}.qr .q .fp.tr{top:8px;right:8px}.qr .q .fp.bl{bottom:8px;left:8px}
+  .qr p{font-weight:600;font-size:.9rem}
+
+  /* CTA BAND */
+  .band{text-align:center;background:var(--cream-2)}
+  .band .arabic{font-size:2rem;color:var(--brown);margin-bottom:8px}
+
+  /* FOOTER */
+  footer.site{background:#16130f;color:#cdbfa6;padding:60px 0 30px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  footer.site .brand{color:#f0e6d2}
+  footer.site .logo{background:#211c16;box-shadow:inset 0 0 0 1px #2f2a22}
+  .foot-about{color:#9a8f7c;margin-top:16px;max-width:30em;font-size:.95rem}
+  .foot-col h4{color:#f0e6d2;font-size:.95rem;margin-bottom:16px;letter-spacing:.03em}
+  .foot-col a{display:block;color:#9a8f7c;margin-bottom:10px;font-size:.92rem;transition:color .2s}
+  .foot-col a:hover{color:var(--gold)}
+  .foot-bottom{border-top:1px solid #2a251e;padding-top:24px;display:flex;justify-content:space-between;
+    flex-wrap:wrap;gap:12px;color:#7d7263;font-size:.85rem}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .hero-grid,.show-grid,.dl-inner,.foot-grid{grid-template-columns:1fr}
+    .steps,.features-grid{grid-template-columns:1fr}
+    .hero-visual{margin-top:30px}
+    .nav-links{display:none}
+    .nav-links.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;
+      gap:0;background:var(--cream);border-bottom:1px solid var(--line);padding:10px 0}
+    .nav-links.open a{padding:14px 24px;width:100%}
+    .nav-toggle{display:block}
+    .show-phones{min-height:auto;margin-top:30px}
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>LAWHI</h1>
-    <p class="tagline">Coming Soon</p>
-    <div class="divider"></div>
-    <p class="description">
-      Lawhi is a Quran memorization app inspired by how people learned for centuries — by writing.
-    </p>
-    <div class="stores">
-      <a class="store-btn" href="#">Download on the App Store</a>
-      <a class="store-btn" href="#">Get it on Google Play</a>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="logo"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><path d="M16 56V24a16 16 0 0 1 32 0v32a3 3 0 0 1-3 3H19a3 3 0 0 1-3-3z" fill="none" stroke="#5c3317" stroke-width="3.4" stroke-linejoin="round"/><path d="M22 30c4-2.4 8 2.4 12 0s8-2.4 12 0" fill="none" stroke="#5c3317" stroke-width="3" stroke-linecap="round"/><path d="M22 39c4-2.4 8 2.4 12 0s8-2.4 12 0" fill="none" stroke="#5c3317" stroke-width="3" stroke-linecap="round"/><path d="M22 48c3.5-2.1 7 1.8 10.5.3" fill="none" stroke="#5c3317" stroke-width="3" stroke-linecap="round"/><path d="M37 44l8 4-8 4z" fill="#c8a96a"/></svg></span> Lawhi
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#progress">Progress</a>
+      <a href="#download">Download</a>
+    </nav>
+    <a class="btn btn-primary" href="#download">Get the app</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5c3317" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> The first write-to-memorize Quran app</span>
+      <h1 class="hero-title">Memorize the Quran <span class="accent">by writing it.</span></h1>
+      <p class="hero-sub">Lawhi brings back the timeless method of learning the Quran by hand. Reconstruct each page word by word, build true recall, and watch your khatmah take shape.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#download">Start memorizing — it's free</a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <p class="hero-note"><b>Free &amp; ad-free</b> · Syncs across devices · iOS &amp; Android</p>
+    </div>
+    <div class="hero-visual">
+      <!-- back phone: light account -->
+      <div class="phone back"><div class="screen sc-light">
+        <div class="notch"></div>
+        <div class="sc-top"><span>1:11</span><span>Wi-Fi 40%</span></div>
+        <div class="sc-h">Account</div>
+        <div class="card-ui">
+          <div class="row"><div class="av">&#128100;</div><div><b>Guest User</b><br><small style="color:#8c8170">Sign in to access your account</small></div></div>
+          <div class="signin">Sign In</div>
+        </div>
+        <div class="label">APPEARANCE</div>
+        <div class="opt"><div class="l"><span class="icn">&#9789;</span> Dark Mode</div><div class="toggle"><i></i></div></div>
+        <div class="label">GENERAL</div>
+        <div class="opt"><div class="l"><span class="icn">&#9432;</span> About App</div><span style="color:#c2b698">&#8250;</span></div>
+        <div class="tabbar">
+          <div class="t"><b></b>Home</div><div class="t"><b></b>Quran</div>
+          <div class="t"><b></b>Analytics</div><div class="t on"><b></b>Account</div>
+        </div>
+      </div></div>
+      <!-- front phone: dark reading/writing -->
+      <div class="phone front"><div class="screen sc-dark">
+        <div class="notch"></div>
+        <div class="sc-top"><span>&#8635; Juz 1</span><span>Al Fatiha</span></div>
+        <div class="sc-banner arabic">&#1587;&#1608;&#1585;&#1577; &#1575;&#1604;&#1601;&#1575;&#1578;&#1581;&#1577;</div>
+        <div class="sc-lines">
+          <div class="sc-line"><span class="ayah">&#1633;</span></div>
+          <div class="sc-line"><span class="ayah">&#1634;</span></div>
+          <div class="sc-line"><span class="ayah">&#1635;</span></div>
+          <div class="sc-line"><span class="ayah">&#1636;</span></div>
+        </div>
+        <div class="sc-tray">
+          <div class="sc-bar"><i></i></div>
+          <h4>Word Explorer</h4>
+          <div class="chips arabic">
+            <span class="chip">&#1575;&#1604;&#1581;&#1605;&#1583;</span><span class="chip">&#1575;&#1604;&#1585;&#1581;&#1605;&#1606;</span>
+            <span class="chip">&#1575;&#1604;&#1585;&#1581;&#1610;&#1605;</span><span class="chip">&#1575;&#1604;&#1583;&#1610;&#1606;</span>
+            <span class="chip">&#1605;&#1575;&#1604;&#1603;</span><span class="chip">&#1575;&#1610;&#1575;&#1603;</span>
+            <span class="chip">&#1606;&#1593;&#1576;&#1583;</span><span class="chip">&#1575;&#1607;&#1583;&#1606;&#1575;</span>
+          </div>
+        </div>
+      </div></div>
     </div>
   </div>
-  <footer>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Service</a>
-    <a href="mailto:contact@lawhapp.com">Contact</a>
-  </footer>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">How it works</span>
+      <h2>Learning by writing, reimagined</h2>
+      <p>For centuries, students of the Quran learned by writing on a <em>lawh</em> — a wooden tablet. Lawhi turns that tradition into a focused, modern practice.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">STEP 01</div>
+        <h3>Start with a blank page</h3>
+        <p>Each page begins empty, with only the verse markers in place. A word tray slides up from the bottom, holding every word on the page in alphabetical order.</p>
+        <span class="glyph">&#1633;</span>
+      </div>
+      <div class="step">
+        <div class="num">STEP 02</div>
+        <h3>Rebuild it word by word</h3>
+        <p>Choose the right words in the right order to reconstruct the page from memory. Use the line filter to show only a couple of lines at a time when you need a gentler challenge.</p>
+        <span class="glyph">&#1634;</span>
+      </div>
+      <div class="step">
+        <div class="num">STEP 03</div>
+        <h3>Strengthen real recall</h3>
+        <p>Writing forces active memory instead of passive reading. Every correct word cements the page a little deeper — until you can write it without a single hint.</p>
+        <span class="glyph">&#1635;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Features</span>
+      <h2>Everything you need to memorize with intention</h2>
+      <p>A calm, distraction-free space built around one goal: helping the Quran stay with you.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature"><div class="fi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+        <h3>Write to remember</h3><p>The core experience — reconstruct each page by selecting words from the tray, the way it was learned on a wooden tablet.</p></div>
+      <div class="feature"><div class="fi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-5"/><path d="M21 7v5"/></svg></div>
+        <h3>Deep progress tracking</h3><p>Sessions, time spent, accuracy, words and pages completed, and a full breakdown after every session.</p></div>
+      <div class="feature"><div class="fi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Khatmah at a glance</h3><p>Track your journey through all 604 pages and celebrate every completed khatmah of the whole Quran.</p></div>
+      <div class="feature"><div class="fi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h3>Sync across devices</h3><p>Sign in and pick up exactly where you left off — your progress follows you from phone to tablet.</p></div>
+      <div class="feature"><div class="fi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></div>
+        <h3>Light &amp; dark mode</h3><p>A warm light theme for daytime and a gentle dark theme for late-night sessions — switch any time.</p></div>
+      <div class="feature"><div class="fi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14l-4-3-4 3-4-3z"/></svg></div>
+        <h3>Adjustable line filter</h3><p>Reduce the words shown in the tray by line, so you can focus on just one or two lines at a time.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS SHOWCASE -->
+<section class="showcase" id="progress">
+  <div class="wrap show-grid">
+    <div>
+      <span class="kicker">Your progress</span>
+      <h2>See every word add up</h2>
+      <p style="color:var(--muted);font-size:1.12rem">Lawhi quietly keeps score of your effort — so your consistency becomes something you can actually watch grow, day after day.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="big">604</div><div class="lbl">Pages to your khatmah</div></div>
+        <div class="stat"><div class="big">100%</div><div class="lbl">Accuracy tracking</div></div>
+        <div class="stat"><div class="big">&#8734;</div><div class="lbl">Streaks &amp; session history</div></div>
+      </div>
+    </div>
+    <div class="show-phones">
+      <div class="phone front" style="transform:none"><div class="screen sc-light">
+        <div class="notch"></div>
+        <div class="sc-top"><span>1:11</span><span>Wi-Fi 40%</span></div>
+        <div class="sc-h">Analytics</div>
+        <div class="label" style="margin-top:6px">OVERVIEW</div>
+        <div class="an-grid">
+          <div class="an-card"><div class="ic" style="background:#f0e7d6;color:#b8860b">&#128278;</div><div class="v">2</div><div class="k">Total Sessions</div></div>
+          <div class="an-card"><div class="ic" style="background:#f0e7d6;color:#b8860b">&#128214;</div><div class="v">1</div><div class="k">Pages Completed</div></div>
+          <div class="an-card"><div class="ic" style="background:#e3f0e0;color:#3f8f4f">T</div><div class="v">30</div><div class="k">Words Completed</div></div>
+          <div class="an-card"><div class="ic" style="background:#f6dede;color:#c0392b">&#10005;</div><div class="v">3</div><div class="k">Incorrect Words</div></div>
+        </div>
+        <div class="streak">
+          <div><b style="color:#e8731f">&#128293; 1</b><span>Current Streak</span></div>
+          <div><b style="color:#b8860b">&#127942; 1</b><span>Best Streak</span></div>
+          <div><b style="color:#3a6ea5">Jun 10</b><span>Last Active</span></div>
+        </div>
+        <div class="tabbar">
+          <div class="t"><b></b>Home</div><div class="t"><b></b>Quran</div>
+          <div class="t on"><b></b>Analytics</div><div class="t"><b></b>Account</div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="download" id="download">
+  <div class="wrap dl-inner">
+    <div>
+      <span class="kicker" style="color:var(--gold)">Get started</span>
+      <h2>Begin your khatmah today</h2>
+      <p class="sec-p">Download Lawhi free on iOS and Android. No ads, no cost — just you, the words, and the quiet discipline of writing.</p>
+      <div class="store-row">
+        <a class="store" href="#" aria-label="Download on the App Store">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M16.5 3c.1 1-.3 2-.9 2.7-.6.8-1.6 1.4-2.6 1.3-.1-1 .4-2 .9-2.6.6-.8 1.7-1.3 2.6-1.4zM19 17.3c-.4.9-.6 1.3-1.1 2.1-.7 1.1-1.7 2.5-2.9 2.5-1.1 0-1.4-.7-2.9-.7s-1.8.7-2.9.7c-1.2 0-2.1-1.2-2.8-2.3-2-3-2.2-6.6-1-8.5.9-1.4 2.2-2.2 3.5-2.2 1.3 0 2.1.7 3.2.7 1 0 1.7-.7 3.2-.7 1.1 0 2.3.6 3.2 1.7-2.8 1.5-2.3 5.5.5 6.7z"/></svg>
+          <span><small>Download on the</small><b>App Store</b></span>
+        </a>
+        <a class="store" href="#" aria-label="Get it on Google Play">
+          <svg width="24" height="24" viewBox="0 0 24 24"><path d="M3.6 2.3 13 11.7l2.7-2.7L4.9 2.1a1.3 1.3 0 0 0-1.3.2z" fill="#34a853"/><path d="M3 2.9C2.8 3.1 2.7 3.5 2.7 4v16c0 .5.1.9.4 1.1L12.4 12 3 2.9z" fill="#4285f4"/><path d="M13 12.3 3.6 21.7c.4.3.9.3 1.4 0l10.7-6.2L13 12.3z" fill="#ea4335"/><path d="M18.8 10.7 15.7 9 13 11.7l2.7 2.7 3.1-1.8c1-.6 1-2.1 0-2.7z" fill="#fbbc04"/></svg>
+          <span><small>Get it on</small><b>Google Play</b></span>
+        </a>
+      </div>
+    </div>
+    <div class="qr-row">
+      <div class="qr"><div class="q"><span class="fp tl"></span><span class="fp tr"></span><span class="fp bl"></span></div><p>Scan for iOS</p></div>
+      <div class="qr"><div class="q"><span class="fp tl"></span><span class="fp tr"></span><span class="fp bl"></span></div><p>Scan for Android</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="band">
+  <div class="wrap">
+    <div class="arabic">&#1573;&#1606;&#1617;&#1614;&#1605;&#1614;&#1575; &#1575;&#1604;&#1571;&#1593;&#1605;&#1614;&#1575;&#1604;&#1615; &#1576;&#1616;&#1575;&#1604;&#1606;&#1616;&#1617;&#1610;&#1614;&#1575;&#1578;&#1616;</div>
+    <h2 style="margin-top:4px">Write a little every day.<br>Carry the Quran for life.</h2>
+    <a class="btn btn-primary" style="margin-top:22px" href="#download">Download Lawhi</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top"><span class="logo"><svg viewBox="0 0 64 64" width="100%" height="100%" aria-hidden="true"><path d="M16 56V24a16 16 0 0 1 32 0v32a3 3 0 0 1-3 3H19a3 3 0 0 1-3-3z" fill="none" stroke="#5c3317" stroke-width="3.4" stroke-linejoin="round"/><path d="M22 30c4-2.4 8 2.4 12 0s8-2.4 12 0" fill="none" stroke="#5c3317" stroke-width="3" stroke-linecap="round"/><path d="M22 39c4-2.4 8 2.4 12 0s8-2.4 12 0" fill="none" stroke="#5c3317" stroke-width="3" stroke-linecap="round"/><path d="M22 48c3.5-2.1 7 1.8 10.5.3" fill="none" stroke="#5c3317" stroke-width="3" stroke-linecap="round"/><path d="M37 44l8 4-8 4z" fill="#c8a96a"/></svg></span> Lawhi</a>
+        <p class="foot-about">A Quran writing and memorization companion — built to bring back the tradition of learning by hand, for a new generation.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#progress">Progress</a>
+        <a href="#download">Download</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="mailto:support@lawhapp.com">support@lawhapp.com</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span id="yr"></span> Lawh LLC. All rights reserved.</span>
+      <span>Made for the memorizers of the Quran.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var t = document.getElementById('navToggle'), l = document.getElementById('navLinks');
+  if (t) t.addEventListener('click', function(){ l.classList.toggle('open'); });
+  document.querySelectorAll('#navLinks a').forEach(function(a){
+    a.addEventListener('click', function(){ l.classList.remove('open'); });
+  });
+</script>
 </body>
 </html>
