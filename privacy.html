@@ -16,61 +16,149 @@
     .container { max-width: 760px; margin: 0 auto; }
     h1 {
       font-weight: 300;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       margin-bottom: 0.5rem;
       font-size: 2.25rem;
     }
-    .updated { color: #a39e94; font-size: 0.9rem; margin-bottom: 2.5rem; }
-    h2 { font-weight: 400; margin: 2rem 0 0.75rem; font-size: 1.3rem; color: #c8a96a; }
+    .dates { color: #a39e94; font-size: 0.9rem; margin-bottom: 2rem; }
+    .dates span { display: block; }
+    h2 { font-weight: 500; margin: 2.25rem 0 0.75rem; font-size: 1.3rem; color: #c8a96a; }
+    h3 { font-weight: 500; margin: 1.5rem 0 0.5rem; font-size: 1.05rem; color: #d8b97e; }
     p { margin-bottom: 1rem; color: #d8d3ca; }
-    a { color: #c8a96a; }
-    .back { display: inline-block; margin-bottom: 2rem; color: #a39e94; text-decoration: none; }
+    ul { margin: 0 0 1rem 1.25rem; color: #d8d3ca; }
+    li { margin-bottom: 0.5rem; }
+    a { color: #c8a96a; word-break: break-word; }
+    .back { display: inline-block; margin-bottom: 1.5rem; color: #a39e94; text-decoration: none; }
     .back:hover { color: #e8e4dc; }
-    .placeholder {
-      border: 1px dashed #5a554c;
-      border-radius: 8px;
-      padding: 1.5rem;
-      color: #a39e94;
-      font-style: italic;
-    }
+    .intro { color: #d8d3ca; }
   </style>
 </head>
 <body>
   <div class="container">
     <a class="back" href="index.html">&larr; Back to home</a>
-    <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: [DATE]</p>
+    <h1>Privacy Policy for Lawhi</h1>
+    <p class="dates">
+      <span>Effective Date: June 13, 2026</span>
+      <span>Last Updated: June 13, 2026</span>
+    </p>
 
-    <div class="placeholder">
-      <p>This page is ready for your Privacy Policy content. Once your drafted policy is finalized, replace this placeholder section with the full text. The structure below is provided as a starting outline.</p>
-    </div>
+    <p class="intro">This Privacy Policy explains how Lawh LLC ("Lawh," "we," "us," or "our") collects, uses, shares, and protects information when you use the Lawhi mobile application and related services (the "App"). Lawhi is a Quran writing and memorization companion.</p>
+    <p>By using the App, you agree to the practices described in this Privacy Policy. If you do not agree, please do not use the App.</p>
 
-    <h2>1. Introduction</h2>
-    <p>[Your introduction here — who you are and the scope of this policy.]</p>
+    <h2>1. Who We Are</h2>
+    <p>The data controller responsible for your information is:</p>
+    <p>Lawh LLC<br>Contact: <a href="mailto:support@lawhapp.com">support@lawhapp.com</a><br>Website: <a href="https://lawhapp.com">https://lawhapp.com</a></p>
+    <p>For any privacy-related questions or requests, contact us at the email above.</p>
 
     <h2>2. Information We Collect</h2>
-    <p>[Describe what data Lawhi collects, e.g. account information, memorization progress, device data.]</p>
+    <p>We collect the following categories of information:</p>
+
+    <h3>a. Account Information</h3>
+    <p>When you create an account, we collect:</p>
+    <ul>
+      <li>Your email address</li>
+      <li>Your name and profile photo (if you sign in with Google or Apple, we receive the basic profile information you authorize)</li>
+      <li>Authentication identifiers (a unique user ID and authentication tokens managed through Firebase Authentication)</li>
+    </ul>
+    <p>You can sign in using email and password, Google Sign-In, or Sign in with Apple. When you use Sign in with Apple, you may choose to hide your real email address; in that case Apple provides us with a private relay email instead.</p>
+
+    <h3>b. Content and Progress Data</h3>
+    <p>To provide core features and sync your experience across devices, we store data you generate in the App, which may include:</p>
+    <ul>
+      <li>Your memorization and writing progress</li>
+      <li>Bookmarks, settings, and preferences</li>
+      <li>Other activity data tied to your account</li>
+    </ul>
+    <p>This data is stored in our cloud database (Google Firebase / Cloud Firestore) and associated with your account.</p>
+
+    <h3>c. Usage and Analytics Data</h3>
+    <p>We use Firebase Analytics to understand how the App is used and to improve it. This may include:</p>
+    <ul>
+      <li>App events and feature interactions (for example, screens viewed and actions taken)</li>
+      <li>Session information, such as how often and how long you use the App</li>
+      <li>Device and technical information, including device model, operating system version, language, app version, and a non-permanent device or installation identifier</li>
+      <li>Approximate location derived from your IP address (we do not collect precise GPS location)</li>
+    </ul>
+
+    <h3>d. Purchase Information (Future Feature)</h3>
+    <p>The App is currently free. We plan to introduce in-app purchases. When that feature launches, purchases will be processed by the Apple App Store or Google Play Store, not by us directly. We do not collect or store your full payment card details. We may receive confirmation of a transaction and your subscription or purchase status.</p>
 
     <h2>3. How We Use Your Information</h2>
-    <p>[Explain how the collected data is used.]</p>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Create and manage your account and authenticate you</li>
+      <li>Provide, maintain, and sync the App's features across your devices</li>
+      <li>Save your progress and personalize your experience</li>
+      <li>Analyze usage to fix problems and improve the App</li>
+      <li>Communicate with you about your account, updates, and support requests</li>
+      <li>Detect, prevent, and address technical issues, fraud, or abuse</li>
+      <li>Comply with legal obligations</li>
+    </ul>
 
-    <h2>4. Data Sharing and Disclosure</h2>
-    <p>[Describe whether and how data is shared with third parties.]</p>
+    <h2>4. Legal Bases for Processing (EEA / UK Users)</h2>
+    <p>If you are in the European Economic Area or the United Kingdom, we process your personal data under the following legal bases:</p>
+    <ul>
+      <li>Performance of a contract — to provide the App and the features you request (such as account creation and progress sync)</li>
+      <li>Legitimate interests — to analyze and improve the App, secure our services, and prevent abuse, provided these interests are not overridden by your rights</li>
+      <li>Consent — where required, for example for certain analytics; you may withdraw consent at any time</li>
+      <li>Legal obligation — where we must process data to comply with applicable law</li>
+    </ul>
 
-    <h2>5. Data Security</h2>
-    <p>[Describe the measures taken to protect user data.]</p>
+    <h2>5. How We Share Your Information</h2>
+    <p>We do not sell your personal information. We share information only as described below:</p>
+    <ul>
+      <li>Service providers. We use Google Firebase (Authentication, Cloud Firestore, and Analytics) to operate the App. Google processes data on our behalf under its own terms and security measures.</li>
+      <li>Sign-in providers. When you choose Google or Apple sign-in, those providers handle the authentication and receive limited information needed to complete sign-in.</li>
+      <li>App stores. When in-app purchases launch, Apple and Google will process payment transactions.</li>
+      <li>Legal and safety. We may disclose information if required by law, regulation, legal process, or governmental request, or to protect the rights, safety, and property of Lawh LLC, our users, or others.</li>
+      <li>Business transfers. If Lawh LLC is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you of any such change.</li>
+    </ul>
 
-    <h2>6. Your Rights</h2>
-    <p>[Describe user rights regarding their data, including access and deletion.]</p>
+    <h2>6. International Data Transfers</h2>
+    <p>We operate globally, and the App is available worldwide. Your information, including data stored through Google Firebase, may be processed and stored on servers located in the United States or other countries that may have different data protection laws than your own.</p>
+    <p>Where we transfer personal data out of the EEA or UK, we rely on appropriate safeguards such as the European Commission's Standard Contractual Clauses or an equivalent mechanism.</p>
 
-    <h2>7. Children's Privacy</h2>
-    <p>[Describe your policy regarding users under 13 / 18.]</p>
+    <h2>7. Data Retention</h2>
+    <p>We keep your personal information for as long as your account is active or as needed to provide the App. If you delete your account, we will delete or anonymize your personal data within a reasonable period, except where we are required to retain it to comply with legal obligations, resolve disputes, or enforce our agreements. Aggregated or anonymized data that can no longer identify you may be retained.</p>
 
-    <h2>8. Changes to This Policy</h2>
-    <p>[Explain how users will be notified of changes.]</p>
+    <h2>8. Data Security</h2>
+    <p>We use industry-standard technical and organizational measures to protect your information, including the security features provided by Google Firebase. However, no method of transmission or storage is completely secure, and we cannot guarantee absolute security.</p>
 
-    <h2>9. Contact Us</h2>
-    <p>If you have any questions about this Privacy Policy, you can contact us at <a href="mailto:contact@lawhapp.com">contact@lawhapp.com</a>.</p>
+    <h2>9. Your Rights and Choices</h2>
+    <p>Depending on where you live, you may have some or all of the following rights:</p>
+    <ul>
+      <li>Access — request a copy of the personal data we hold about you</li>
+      <li>Correction — request that we correct inaccurate or incomplete data</li>
+      <li>Deletion — request that we delete your personal data</li>
+      <li>Portability — request your data in a portable format</li>
+      <li>Restriction or objection — restrict or object to certain processing</li>
+      <li>Withdraw consent — withdraw consent where processing is based on consent</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <a href="mailto:support@lawhapp.com">support@lawhapp.com</a>. We will respond as required by applicable law. You may also delete your account from within the App, which will remove your associated data as described in Section 7.</p>
+
+    <h3>For California Residents (CCPA/CPRA)</h3>
+    <p>California residents have the right to know what personal information we collect, to request deletion, to correct inaccurate information, and to not be discriminated against for exercising these rights. We do not sell or share your personal information for cross-context behavioral advertising. To make a request, contact us at <a href="mailto:support@lawhapp.com">support@lawhapp.com</a>.</p>
+
+    <h3>For EEA / UK Residents</h3>
+    <p>You have the right to lodge a complaint with your local data protection authority if you believe we have not handled your personal data properly.</p>
+
+    <h2>10. Children's Privacy</h2>
+    <p>The App is intended for a general audience and is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. In certain jurisdictions, the minimum age may be higher (up to 16 in parts of the EEA); where local law requires a higher age of consent, that age applies.</p>
+    <p>If you are under the applicable age, you should only use the App with the involvement and consent of a parent or guardian. If we learn that we have collected personal information from a child below the applicable age without appropriate consent, we will delete it promptly. If you believe a child has provided us with personal information, please contact us at <a href="mailto:support@lawhapp.com">support@lawhapp.com</a>.</p>
+
+    <h2>11. Third-Party Links and Services</h2>
+    <p>The App relies on third-party services (such as Google Firebase, Google, and Apple). Their handling of your information is governed by their own privacy policies. We encourage you to review them:</p>
+    <ul>
+      <li>Google Privacy Policy: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></li>
+      <li>Apple Privacy Policy: <a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a></li>
+    </ul>
+
+    <h2>12. Changes to This Privacy Policy</h2>
+    <p>We may update this Privacy Policy from time to time. When we make material changes, we will update the "Last Updated" date and, where appropriate, notify you through the App or by other means. Your continued use of the App after changes take effect constitutes acceptance of the revised policy.</p>
+
+    <h2>13. Contact Us</h2>
+    <p>If you have any questions about this Privacy Policy or our data practices, contact us at:</p>
+    <p>Lawh LLC<br>Email: <a href="mailto:support@lawhapp.com">support@lawhapp.com</a><br>Website: <a href="https://lawhapp.com">https://lawhapp.com</a></p>
   </div>
 </body>
 </html>
